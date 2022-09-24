@@ -41,6 +41,12 @@ namespace Pinetime {
         lv_color_t colorOn = lv_color_hex(0xffffff);
         lv_color_t colorOff = lv_color_hex(0x444444);
         lv_color_t background = lv_color_hex(0x000000);
+        
+        uint8_t bitSize = 25;
+        uint8_t bitMargin = 28;
+        uint8_t screenPadding = 28;
+        
+        int bitRadius = 8; //LV_RADIUS_CIRCLE;
       
         uint8_t displayedHourTens = 0;
         uint8_t displayedHourOnes = 0;

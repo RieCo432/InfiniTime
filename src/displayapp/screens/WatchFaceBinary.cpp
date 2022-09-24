@@ -12,6 +12,8 @@
 #include "components/motion/MotionController.h"
 #include "components/settings/Settings.h"
 
+
+
 using namespace Pinetime::Applications::Screens;
 
 WatchFaceBinary::WatchFaceBinary(DisplayApp* app,
@@ -37,90 +39,111 @@ WatchFaceBinary::WatchFaceBinary(DisplayApp* app,
   lv_obj_set_style_local_text_color(notificationIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_LIME);
   lv_label_set_text_static(notificationIcon, NotificationIcon::GetIcon(false));
   lv_obj_align(notificationIcon, nullptr, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+  
+  uint8_t bitX[4];
+  uint8_t bitY[4];
+  
+  for (uint8_t i = 0; i < 4; i++) {
+    bitX[i] = WatchFaceBinary::screenPadding + i * (bitMargin + bitSize);
+    bitY[i] = WatchFaceBinary::screenPadding + i * (bitMargin + bitSize);
+  }
 
 
   // First Column
   hourTensOne = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourTensOne, 30, 30);
+  lv_obj_set_size(hourTensOne, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourTensOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourTensOne, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourTensOne, 15, 195);
+  lv_obj_set_style_local_radius(hourTensOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourTensOne, bitX[0], bitY[3]);
   
   hourTensTwo = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourTensTwo, 30, 30);
+  lv_obj_set_size(hourTensTwo, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourTensTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourTensTwo, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourTensTwo, 15, 135);
+  lv_obj_set_style_local_radius(hourTensTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourTensTwo, bitX[0], bitY[2]);
   
   // Second column
   hourOnesOne = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourOnesOne, 30, 30);
+  lv_obj_set_size(hourOnesOne, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourOnesOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourOnesOne, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourOnesOne, 75, 195);
+  lv_obj_set_style_local_radius(hourOnesOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourOnesOne, bitX[1], bitY[3]);
   
   hourOnesTwo = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourOnesTwo, 30, 30);
+  lv_obj_set_size(hourOnesTwo, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourOnesTwo, 75, 135);
+  lv_obj_set_style_local_radius(hourOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourOnesTwo, bitX[1], bitY[2]);
   
   hourOnesFour = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourOnesFour, 30, 30);
+  lv_obj_set_size(hourOnesFour, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourOnesFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourOnesFour, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourOnesFour, 75, 75);
+  lv_obj_set_style_local_radius(hourOnesFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourOnesFour, bitX[1], bitY[1]);
   
   hourOnesEight = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(hourOnesEight, 30, 30);
+  lv_obj_set_size(hourOnesEight, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(hourOnesEight, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(hourOnesEight, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(hourOnesEight, 75, 15);
+  lv_obj_set_style_local_radius(hourOnesEight, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(hourOnesEight, bitX[1], bitY[0]);
   
   //Third column
     // Second column
   minuteTensOne = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteTensOne, 30, 30);
+  lv_obj_set_size(minuteTensOne, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteTensOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteTensOne, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteTensOne, 135, 195);
+  lv_obj_set_style_local_radius(minuteTensOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteTensOne, bitX[2], bitY[3]);
   
   minuteTensTwo = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteTensTwo, 30, 30);
+  lv_obj_set_size(minuteTensTwo, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteTensTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteTensTwo, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteTensTwo, 135, 135);
+  lv_obj_set_style_local_radius(minuteTensTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteTensTwo, bitX[2], bitY[2]);
   
   minuteTensFour = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteTensFour, 30, 30);
+  lv_obj_set_size(minuteTensFour, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteTensFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteTensFour, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteTensFour, 135, 75);
+  lv_obj_set_style_local_radius(minuteTensFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteTensFour, bitX[2], bitY[1]);
   
   // Fourth column
   minuteOnesOne = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteOnesOne, 30, 30);
+  lv_obj_set_size(minuteOnesOne, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteOnesOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteOnesOne, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteOnesOne, 195, 195);
+  lv_obj_set_style_local_radius(minuteOnesOne, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteOnesOne, bitX[3], bitY[3]);
   
   minuteOnesTwo = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteOnesTwo, 30, 30);
+  lv_obj_set_size(minuteOnesTwo, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteOnesTwo, 195, 135);
+  lv_obj_set_style_local_radius(minuteOnesTwo, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteOnesTwo, bitX[3], bitY[2]);
   
   minuteOnesFour = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteOnesFour, 30, 30);
+  lv_obj_set_size(minuteOnesFour, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteOnesFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteOnesFour, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteOnesFour, 195, 75);
+  lv_obj_set_style_local_radius(minuteOnesFour, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteOnesFour, bitX[3], bitY[1]);
   
   minuteOnesEight = lv_obj_create(lv_scr_act(), NULL);
-  lv_obj_set_size(minuteOnesEight, 30, 30);
+  lv_obj_set_size(minuteOnesEight, WatchFaceBinary::bitSize, WatchFaceBinary::bitSize);
   lv_obj_set_style_local_bg_color(minuteOnesEight, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, colorOff);
   lv_obj_set_style_local_bg_color(minuteOnesEight, LV_OBJ_PART_MAIN, LV_STATE_CHECKED, colorOn);
-  lv_obj_set_pos(minuteOnesEight, 195, 15);
+  lv_obj_set_style_local_radius(minuteOnesEight, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, WatchFaceBinary::bitRadius);
+  lv_obj_set_pos(minuteOnesEight, bitX[3], bitY[0]);
 
 
   heartbeatIcon = lv_label_create(lv_scr_act(), nullptr);
